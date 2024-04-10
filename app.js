@@ -4,17 +4,45 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const foods = require('./foods');
 
+//import schema
+const Foods = require('./models/Foods');
+
 //middlewares json
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-//Rotas
-app.get("/", (req,res)=>{
+//controllers
+app.get("/api/foods", async (req,res)=>{
     res.send(foods);
 });
 
+app.post('/api/foods', (req,res) => {
+    console.log('new food');
+    const food = {
+        "id":req.body,
+        "name":req.body,
+        "category": req.body,
+        "quantity": req.body,
+        "expirationDate": req.body,
+        "price": req.body
+    };
+    res.send("New foods register with success");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Conectar ao Banco de Dados - usar URL fornecida pelo Atlas
-mongoose.connect('mongodb+srv://felipestudy2402:Pot00i8CZFBBL4ux@cluster0.kkygxab.mongodb.net/')
+mongoose.connect(process.env.DB_URL)
     .then(() => {
         console.log('Connected to DataBase');
         
