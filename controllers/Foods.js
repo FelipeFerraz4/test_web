@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 class FoodsControllers {
     static async getFoods (req, res) {
         try {
+            console.log('getFoods');
             const foods = await Foods.find();
             res.status(200).json(foods);
         } catch (error) {
@@ -13,6 +14,7 @@ class FoodsControllers {
 
     static async getFoodsById (req, res) {
         try {
+            console.log('getFoodsById');
             const id = req.params.id;
             // console.log(id);
             // const objectId = new mongoose.Types.ObjectId(id);
@@ -47,6 +49,26 @@ class FoodsControllers {
             // Se Foods.create() for um método estático da classe Foods
             await Foods.create(food);
             res.status(201).json({ message: 'Food added successfully' });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    static async updateFood (req, res) {
+        try {  
+            console.log('update food');
+            const id = req.params.id;
+            const {name, category, quantity, expirationDate, price } = req.body;
+            const food = {
+                name,
+                category,
+                quantity,
+                expirationDate,
+                price
+            };
+
+            const updateFood = await Foods.updateOne({_id: id}, food);
+            res.status(20).json(food);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
