@@ -4,31 +4,13 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const foods = require('./foods');
 
-//import schema
-const Foods = require('./models/Foods');
-
 //middlewares json
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-//controllers
-app.get("/api/foods", async (req,res)=>{
-    res.send(foods);
-});
-
-app.post('/api/foods', (req,res) => {
-    console.log('new food');
-    const food = {
-        "id":req.body,
-        "name":req.body,
-        "category": req.body,
-        "quantity": req.body,
-        "expirationDate": req.body,
-        "price": req.body
-    };
-    res.send("New foods register with success");
-});
-
+//routers
+const routerFoods = require('./routes/Foods');
+app.use('/api/foods', routerFoods); 
 
 
 

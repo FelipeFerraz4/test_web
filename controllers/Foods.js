@@ -1,16 +1,57 @@
-app.get("/api/foods", async (req,res)=>{
-    res.send(foods);
-});
+const Foods = require('../models/Foods');
+const mongoose = require('mongoose');
 
-app.post('api/foods', (req,res) => {
-    console.log('new food');
-    // const food = {
-    //     "id":req.body,
-    //     "name":req.body,
-    //     "category": req.body,
-    //     "quantity": req.body,
-    //     "expirationDate": req.body,
-    //     "price": req.body
-    // };
-    res.send('new foods');
-})
+class FoodsControllers {
+    static async getFoods (req, res) {
+        try {
+            const foods = await Foods.find();
+            res.status(200).json(foods);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    static async getFoodsById (req, res) {
+        try {
+            const id = req.params.id;
+            // console.log(id);
+            // const objectId = new mongoose.Types.ObjectId(id);
+            const foods = await Foods.findById(id);
+            // console.log('aqui' + foods);
+            // if(!foods){
+            //     res.status(422).json({ message: 'user not find' });
+            // }
+            res.status(200).json(foods);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+    
+    static async newFood (req, res) {
+        console.log('new food');
+        const { id, name, category, quantity, expirationDate, price } = req.body;
+    
+        const food = {
+            id,
+            name,
+            category,
+            quantity,
+            expirationDate,
+            price
+        };
+    
+        if (!id || !name || !category || !quantity || !expirationDate || !price) {
+            return res.status(422).json({ error: "Missing required fields" });
+        }
+    
+        try {
+            // Se Foods.create() for um método estático da classe Foods
+            await Foods.create(food);
+            res.status(201).json({ message: 'Food added successfully' });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+}
+
+module.exports = FoodsControllers

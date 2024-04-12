@@ -5,7 +5,7 @@ const FoodsSchema = mongoose.Schema({
         type: Number,
         require: true,
     },
-    Name: {
+    name: {
         type: String,
         require: true,
     },
