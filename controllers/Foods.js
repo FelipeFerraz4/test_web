@@ -29,10 +29,9 @@ class FoodsControllers {
     
     static async newFood (req, res) {
         console.log('new food');
-        const { id, name, category, quantity, expirationDate, price } = req.body;
+        const {name, category, quantity, expirationDate, price } = req.body;
     
         const food = {
-            id,
             name,
             category,
             quantity,
@@ -40,7 +39,7 @@ class FoodsControllers {
             price
         };
     
-        if (!id || !name || !category || !quantity || !expirationDate || !price) {
+        if (!name || !category || !quantity || !expirationDate || !price) {
             return res.status(422).json({ error: "Missing required fields" });
         }
     
