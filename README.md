@@ -6,8 +6,8 @@
   ```
   2 - Configurando o .env
   ```bash
-    PORT=
-    DB_URL=
+    PORT=PORT_NUMBER
+    DB_URL=DATABASE_URL
   ```
   3 - Iniciando o servidor com o banco de dados
   ```bash
