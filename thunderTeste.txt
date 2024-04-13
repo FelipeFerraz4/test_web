@@ -1,0 +1,26 @@
+//getFood
+http://localhost:3000/api/foods
+
+//getFoodById
+http://localhost:3000/api/foods/6619cded762e0aa8b9ff4ad5
+
+//newFood
+http://localhost:3000/api/foods
+//body
+{
+  "name": "Patata Frita",
+  "category": "Fast Food",
+  "quantity": 30,
+  "expirationDate": "2024-01-01T18:10:00.000Z",
+  "price": 35
+}
+
+//updateFood
+http://localhost:3000/api/foods/6619cded762e0aa8b9ff4ad5
+//body
+{
+  "name": "Pizza"
+}
+
+//deleteFood
+http://localhost:3000/api/foods/6619cded762e0aa8b9ff4ad5
