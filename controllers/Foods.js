@@ -19,6 +19,9 @@ class FoodsControllers {
             // console.log(id);
             // const objectId = new mongoose.Types.ObjectId(id);
             const foods = await Foods.findById(id);
+            // if(foods == null) {
+            //     res.status(500).json({ message: 'Not find element' });
+            // }
             // console.log('aqui' + foods);
             // if(!foods){
             //     res.status(422).json({ message: 'user not find' });
