@@ -68,7 +68,19 @@ class FoodsControllers {
             };
 
             const updateFood = await Foods.updateOne({_id: id}, food);
-            res.status(20).json(food);
+            res.status(200).json(food);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    static async deleteFood (req, res) {
+        try {  
+            console.log('delete food');
+            const id = req.params.id;
+
+            await Foods.deleteOne({_id: id});
+            res.status(200).json({message: 'deleted food'});
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
